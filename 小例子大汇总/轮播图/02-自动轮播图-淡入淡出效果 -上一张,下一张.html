@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>自动轮播图--淡入淡出</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            margin:0;
+            padding:0;
+        }
+        ul{
+            list-style: none;
+        }
+        .bannerBox{
+            background: red;
+            width:590px;
+            height:470px;
+            margin:60px auto;
+            position: relative;
+        }
+        .imgBox li{
+            position: absolute;
+            opacity: 0;
+            transition:all .5s;
+        }
+        .imgBox li.active{
+            opacity: 1;
+        }
+        .imgBox li img{
+            width:100%;
+            height:100%;
+        }
+        .tabBox{
+            position: absolute;
+            bottom:30px;
+            left:30px;
+        }
+        .tabBox li{
+            border:solid 2px rgba(0,0,0,0.3);
+            display: inline-block;
+            width:10px;
+            height:10px;
+            border-radius: 50%;
+            margin-right:6px;
+        }
+        .tabBox li.current{
+            border-color:#fff;
+            background:#fff;
+            /* 设置边框阴影：X轴 Y轴  模糊度  模糊度的范围  颜色 */
+            box-shadow: 0 0 1px 5px rgba(0,0,0,0.3);
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- 轮播图 -->
+<div class="bannerBox">
+    <span class="prev"> 上一张 </span>
+    <span class="next"> 下一张 </span>
+    <ul class="imgBox">
+       <li>
+           <img src="images/photo1.jpg" alt="">
+       </li>
+        <li>
+            <img src="images/photo2.jpg" alt="">
+        </li>
+        <li>
+            <img src="images/photo3.jpg" alt="">
+        </li>
+        <li>
+            <img src="images/photo4.jpg" alt="">
+        </li>
+        <li class="active">
+            <img src="images/photo5.jpg" alt="">
+        </li>
+        <li>
+            <img src="images/photo6.jpg" alt="">
+        </li>
+    </ul>
+    <ul class="tabBox">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li class="current"></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+</body>
+<script>
+    var lisImg = document.querySelectorAll('.imgBox li');
+    var lisTab = document.querySelectorAll('.tabBox li');
+    var prevTab = document.querySelector('span');
+    var nextTab = document.querySelectorAll('span')[1];
+//    设置全局变量，存储定时器
+    var timer;
+    var bannerBox = document.querySelector('.bannerBox');
+
+    // 设置页面上显示的初始图片
+    // 设置显示图片的索引值
+    var showIndex = 0;
+    function show(){
+        for( var j = 0; j < lisTab.length; j++ ){
+            lisTab[j].className = '';
+            lisImg[j].className = '';
+        }
+        lisTab[showIndex].className = 'current';
+        lisImg[showIndex].className = 'active';
+    }
+    show();
+
+// 封装下一张
+    function next(){
+        showIndex = showIndex + 1;
+        if( showIndex >= lisTab.length ){
+            showIndex = 0;
+        }
+        show();
+    }
+
+    // 封装上一张
+    function prev(){
+        showIndex--;
+        if( showIndex < 0 ){
+            showIndex = lisTab.length - 1;
+        }
+        show();
+    }
+
+    //    自动轮播值上一张图片 索引值-1
+    timer = setInterval(function(){
+        prev();
+    }, 1000);
+
+    // 当鼠标放在图片之上，停止自动轮播，即清除定时器
+    bannerBox.onmouseover = function(){
+        clearInterval(timer);
+    }
+    // 当鼠标离开图片时，继续自动轮播
+    bannerBox.onmouseleave = function(){
+        // 继续执行倒计时
+        timer = setInterval(function(){
+            prev();
+        }, 1000);
+    }
+
+    for( var i = 0; i < lisTab.length; i++ ){
+        // 将索引值i绑定到每个li标签对象上
+        lisTab[i].index = i;
+        // 给每个li标签绑定一个鼠标滑过的事件(行为)
+        lisTab[i].onmouseover = function(){
+             showIndex = this.index;
+             show();
+        }
+    }
+
+//    点击时切换图片
+    prevTab.onclick = function(){
+        prev();
+    }
+    nextTab.onclick = function(){
+        next();
+
+    }
+</script>
+</html>

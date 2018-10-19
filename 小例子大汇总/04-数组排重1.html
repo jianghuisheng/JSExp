@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组排重</title>
+</head>
+
+<body>
+
+</body>
+<script>
+
+    // 无返回值无参
+    function show() {
+        var arr = [1, 2, 3, 1, 'a', 'a', true, true, 3];
+        // 创建新数组，存储不重复的元素
+        var result = [];
+        for (var i = 0; i < arr.length; i++) {
+            //        console.log(arr[i]);
+            // 判断新数组中有没有这个元素
+            // indexOf(), lastIndexOf(), find(),findIndex();
+            if (result.indexOf(arr[i]) < 0) {
+                result.push(arr[i]);
+            }
+        }
+        console.log(result);
+    }
+    show();
+
+
+
+    //  有返回值有参
+    //  一个函数只能接收一个返回值！！！
+    function show1(arr) {
+        var result = [];
+        for (var i = 0; i < arr.length; i++) {
+            if (result.indexOf(arr[i]) < 0) {
+                result.push(arr[i]);
+            }
+        }
+        return result;
+    }
+    var arr2 = show1([1, 2.3, 3.4, 3, 3, 3, 6]);
+    console.log(arr2);
+
+</script>
+
+</html>

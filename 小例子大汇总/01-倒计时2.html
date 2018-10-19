@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>倒计时</title>
+    <script src="jquery.js"></script>
+    <style>
+        body{
+            background: rgba(203, 68, 108, 0.79);
+        }
+        main {
+            width: 300px;
+            margin: 50px auto;
+            border: 1px solid red;
+            background-image: linear-gradient(45deg, red, blue);
+            color: #fff;
+            text-align: center;
+        }
+
+        div {
+            margin: 50px 0;
+        }
+
+        span {
+            border: 1px solid #000;
+            background: #fff;
+            color: #000;
+            font-size: 18px;
+            padding: 10px 15px;
+            margin: 0 10px;
+        }
+
+        button {
+            background: blue;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            margin-bottom: 15px;
+            font-size: 18px;
+            width: 80%;
+            padding: 10px 0;
+            transition: .5s;
+        }
+
+        button:hover {
+            background: red;
+        }
+        a{
+            position:absolute;
+            left:380px;
+            top:250px;
+            text-decoration: none;
+            color:green;
+        }
+
+    </style>
+</head>
+<body>
+<main>
+    <div>
+        <span>01</span>分
+        <span>15</span>秒
+    </div>
+    <button>开始倒计时</button>
+    <a href="">重新开始</a>
+</main>
+</body>
+<script>
+ var span1=document.querySelectorAll('span')[0];
+ var span2=document.querySelectorAll('span')[1];
+ var btn=document.querySelector('button');
+ var inner1=span1.innerHTML;
+ var inner2=span2.innerHTML;
+ var timer;
+ var num=0;
+
+function show(){
+    inner2--;
+    if(inner2<0){
+        inner1--;
+        if(inner1<0){
+            return;
+        }
+        inner2=5;
+        inner1=inner1<10?'0'+inner1:inner1;
+        span1.innerHTML=inner1;
+
+    }
+    inner2=inner2<10?'0'+inner2:inner2;
+    span2.innerHTML=inner2;
+
+}
+ btn.onclick=function () {
+     num++;
+     if(num%2!=0){
+        timer=setInterval(show,1000);
+        btn.innerHTML='暂停';
+     }else{
+         clearInterval(timer);
+         btn.innerHTML='继续'
+     }
+
+ }
+
+</script>
+</html>

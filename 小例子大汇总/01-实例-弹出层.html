@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>弹出层</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+        body{
+            text-align: center;
+        }
+        button{
+            background:orangered;
+            padding:10px 25px;
+            margin-top:100px;
+            border:none;
+            color:#fff;
+            font-size:20px;
+            border-radius: 8px;
+            transition:.5s;
+            cursor: pointer;
+        }
+        button:hover{
+            background:blue;
+        }
+        #ceng{
+            background:rgba(0,0,0,0.25);
+            position: absolute;
+            width:100vw;
+            height:100vh;
+            top:0;
+            left:0;
+            /* 标签的透明度 */
+            opacity: 0;
+            display: none;
+            transition:0.5s;
+        }
+        #ceng section{
+            width:45%;
+            height:270px;
+            background:#fff;
+            margin:170px auto;
+            border:solid 3px orange;
+        }
+        #ceng section p{
+            background:yellow;
+            line-height: 35px;
+            border:solid 2px orange;
+            text-align: right;
+        }
+        #ceng section p span{
+            border:solid 2px orange;
+            margin-right:20px;
+            padding:0 8px;
+            background:#fff;
+            cursor: pointer;
+            transition:0.5s;
+        }
+        #ceng section p span:hover{
+            font-weight:900;
+        }
+
+        .zoomIn{
+            animation:zoomIn 0.5s linear both;
+        }
+        @keyframes zoomIn {
+            0%{
+                transform:scale(0.1);
+            }
+            100%{
+                transform:scale(1);
+            }
+        }
+        .zoomOut{
+            animation:zoomOut 0.5s linear both;
+        }
+        @keyframes zoomOut {
+            0%{
+                transform:scale(1);
+            }
+            100%{
+                transform:scale(0);
+            }
+        }
+    </style>
+</head>
+<body>
+<button>弹出层</button>
+<div id="ceng">
+    <section class="">
+        <p>
+            <span> × </span>
+        </p>
+        普通的文本内容
+    </section>
+</div>
+<script>
+    // 分析效果
+    // 1.
+    // 2.
+    // 3.
+    var div = document.querySelector('#ceng');
+    var btn = document.querySelector('button');
+    var sec = document.querySelector('section');
+    var span = document.querySelector('span');
+    btn.onclick = function(){
+        // 先让标签显示(目前透明度为0)
+        div.style.display = 'block';
+        // section标签添加类名，即添加动画
+        sec.className = 'zoomIn';
+        // 等待100ms之后，给标签添加透明度
+        setTimeout(function(){
+            div.style.opacity = 1;
+        },100);
+    }
+
+    span.onclick = function(){
+        sec.className = 'zoomOut';
+        setTimeout(function(){
+            div.style.opacity = 0;
+            setTimeout(function(){
+                div.style.display = 'none';
+            },500)
+
+        },500)
+    }
+</script>
+</body>
+</html>

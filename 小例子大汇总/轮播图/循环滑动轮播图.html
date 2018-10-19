@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>循环滑动轮播图</title>
+    <script src="jquery.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .bannerBox {
+            width: 750px;
+            height: 192px;
+            margin-top: 50px;
+            position: relative;
+            float: left;
+            overflow: hidden;
+        }
+
+        .imgBox {
+            width: 4000px;
+            overflow: hidden;
+            position: absolute;
+            border-top: solid 1px #fff;
+            border-bottom: solid 1px #fff;
+        }
+
+        .imgBox li {
+            float: left;
+            width: 150px;
+        }
+
+        .imgBox li img {
+            width: 90%;
+            height: 190px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .slideBox {
+            position: relative;
+            width: 830px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .slideBox>span {
+            float: left;
+            background: #fff;
+            color: #000;
+            margin-top: 50px;
+            width: 30px;
+            text-align: center;
+            padding: 60px 0;
+            height: 192px;
+        }
+
+        .slideBox>span.active {
+            cursor: pointer;
+            background: red;
+            color: #fff;
+        }
+
+        .imgBox li.active img {
+            border: solid 2px blue;
+        }
+
+        .imgBox li img:hover {
+            border: solid 2px blue;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="slideBox">
+        <span class="prev active">上一张</span>
+        <div class="bannerBox">
+            <ul class="imgBox">
+                <li>
+                    <img src="images/z1.jpg" alt="">
+                </li>
+                <li>
+                    <img src="images/z2.jpg" alt="">
+                </li>
+                <li>
+                    <img src="images/z3.jpg" alt="">
+                </li>
+                <li>
+                    <img src="images/z4.jpg" alt="">
+                </li>
+                <li>
+                    <img src="images/z5.jpg" alt="">
+                </li>
+                <li>
+                    <img src="images/z6.jpg" alt="">
+                </li>
+                <li>
+                    <img src="images/z7.jpg" alt="">
+                </li>
+                <li>
+                    <img src="images/z8.jpg" alt="">
+                </li>
+                <li>
+                    <img src="images/z9.jpg" alt="">
+                </li>
+            </ul>
+        </div>
+        <span class="next active">下一张</span>
+    </main>
+</body>
+<script>
+    var width = $('.imgBox li').width();
+    var length = $('.imgBox li').length;
+    $('.imgBox').width(width * length);
+    console.log(width)
+    console.log(length)
+    console.log($('.imgBox'))
+
+    var showIndex = 2;
+
+    function show() {
+        $('.imgBox li').eq(showIndex).addClass('active').siblings().removeClass('active');
+        if (showIndex >= 2 && showIndex < length - 2) {
+            $('.imgBox').stop(true, true).animate({
+                left: -width * (showIndex - 2)
+            }, 1000)
+        }
+    }
+
+    show();
+
+    $('.next').click(function () {
+        if (showIndex == length - 2) {
+            $('.next').removeClass('active');
+        }
+        if (showIndex > length - 2) {
+            return;
+        }
+        showIndex++;
+        show();
+        $('.prev').addClass('active');
+    });
+
+    $('.prev').click(function () {
+        if (showIndex == 1) {
+            $('.prev').removeClass('active');
+        }
+        if (showIndex <= 0) {
+            return;
+        }
+        showIndex--;
+        show();
+        $('.next').addClass('active');
+    });
+</script>
+
+</html>

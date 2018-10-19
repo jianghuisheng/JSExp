@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>作业讲解--倒计时</title>
+    <style>
+        main {
+            background: #222;
+            color: #fff;
+            width: 260px;
+            margin: 0 auto;
+            text-align: center;
+            overflow: hidden;
+            /*border: 3px solid red;*/
+        }
+
+        div {
+            margin: 30px 0;
+            /*border: 1px solid red;*/
+        }
+
+        span {
+            margin: 0 10px;
+            background: #fff;
+            color: #000;
+            font-size: 18px;
+            border: solid 1px #ccc;
+            padding: 10px 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 80%;
+            margin: 15px auto;
+            line-height: 40px;
+            font-size: 20px;
+            background: blue;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+
+        button:hover {
+            background: red;
+
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div>
+            <span> 01 </span> 分
+            <span> 15 </span> 秒
+        </div>
+        <button type="button"> 开始倒计时 </button>
+    </main>
+</body>
+<script>
+    // 1.奇数点击时，开始倒计时，偶数点击时，暂停倒计时
+    //    点击时，文字内容及背景颜色发生变化
+    // 2.每隔1s，秒针减1，
+    //   如果秒针小于0时，分针减1，秒针重新赋值59，
+    //   继续秒针减1，
+    //   如果分针小于0，秒针小于0，终止倒计时
+    // 3.如果分针、秒针小于10，前面要加0
+
+    // 获取所有的标签，及标签的内容
+    var btn = document.querySelector('button');
+    var span1 = document.querySelector('span');
+    //  通过选择器获取所有匹配的标签，计数从0开始
+    var span2 = document.querySelectorAll('span')[1];
+    var inner1 = span1.innerHTML;
+    var inner2 = span2.innerHTML;
+    var count = 0;
+    var timer;
+
+    // 倒计时过程
+    function show() {
+        inner2--;
+        if (inner2 < 0) {
+            inner1--;
+            if (inner1 < 0) {
+                return;
+            }
+            inner2 = 11;
+            inner1 = inner1 < 10 ? '0' + inner1 : inner1;
+            span1.innerHTML = inner1;
+        }
+        inner2 = inner2 < 10 ? '0' + inner2 : inner2;
+        span2.innerHTML = inner2;
+    }
+    // show();
+    //每隔1000ms，执行一次show方法
+    // setInterval(show, 1000);
+
+    btn.onclick = function () {
+        count++;
+        if (count % 2 !== 0) {
+            btn.innerHTML = '暂停';
+            timer = setInterval(show, 1000);
+        } else {
+            btn.innerHTML = '开始倒计时';
+            clearInterval(timer);
+        }
+    }
+</script>
+
+</html>

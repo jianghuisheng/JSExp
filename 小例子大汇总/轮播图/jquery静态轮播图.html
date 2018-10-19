@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>左右滑动轮播图</title>
+    <script src="jquery.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .banner {
+            width: 344px;
+            height: 444px;
+            margin: 50px auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .imgBox {
+            overflow: hidden;
+            /*li标签水平方向排布*/
+            width: 5000px;
+            position: absolute;
+        }
+
+        .imgBox li {
+            float: left;
+            width: 344px;
+            height: 440px;
+        }
+
+        .iconBox {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            bottom: 20px;
+            padding: 5px;
+            border-radius: 20px;/* F12看ul高为20px*/
+            overflow: hidden;/*定位元素,有没有这句不影响*/
+            left: calc(50% - 110px);/* F12看ul宽为220px*/
+        }
+
+        .iconBox li {
+            width: 10px;
+            height: 10px;
+            border: 1px solid #fff;
+            border-radius: 50%;
+            /*中间有间距,float没有*/
+            /*display:inline-block;*/
+            float: left;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+
+        .iconBox li:last-child {
+            margin-right: 0;
+        }
+
+        .iconBox li.on {
+            background: #fff;
+        }
+
+        .jindu {
+            position: absolute;
+            width: 100%;
+            border-top: 1px solid #fff;
+            border-bottom: 1px solid #fff;
+            bottom: 3px;
+        }
+
+        .jindu span {
+            display: block;
+            height: 10px;
+            width: 0;
+            background: green;
+        }
+    </style>
+</head>
+<body>
+<div class="banner">
+    <ul class="imgBox">
+        <li><img src="images/z1.jpg" alt=""></li>
+        <li><img src="images/z2.jpg" alt=""></li>
+        <li><img src="images/z3.jpg" alt=""></li>
+        <li><img src="images/z4.jpg" alt=""></li>
+        <li><img src="images/z5.jpg" alt=""></li>
+        <li><img src="images/z6.jpg" alt=""></li>
+        <li><img src="images/z7.jpg" alt=""></li>
+        <li><img src="images/z8.jpg" alt=""></li>
+        <li><img src="images/z9.jpg" alt=""></li>
+    </ul>
+    <ul class="iconBox">
+        <li class="on"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <div class="jindu">
+        <span></span>
+    </div>
+</div>
+
+</body>
+<script>
+    // 分析谁移动,移动的距离是多少
+    //    ul移动,移动距离与图片宽度和图片个数有关
+
+    //    获取li标签的宽度
+    var width = $('.imgBox li').width();
+    //    获取li标签的个数
+    var length = $('.imgBox li').length;
+    /*console.log(width)
+    console.log(length)*/
+//  重新设置ul的宽度
+    $('.imgBox').width(width*length);
+
+    $('.iconBox li').mouseover(function () {
+        // 当前标签添加类名,同级元素移除类名
+        $(this).addClass('on').siblings().removeClass('on');
+        //  获取当前的索引值
+        var index=$(this).index();
+        //  鼠标滑过那个标签,ul移动向左移动几个宽度
+        // stop()停止上一个动画执行
+        $('.imgBox').stop(true).animate({
+            left:-width*index
+        },1000);
+
+        $('.jindu span').stop(true).css('width',0).animate({
+            width:width
+        },1000,function () {
+            $(this).width(0);
+        })
+
+    })
+</script>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>选项卡</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: rgb(240, 243, 239);
+            padding: 40px 100px;
+            font-size: 12px;
+        }
+a{
+    color:#666;
+}
+        #box {
+            width: 325px;
+        }
+
+        #box>p {
+            line-height: 30px;
+            background-position: 65px 7px;
+            background: #fff;
+            padding: 10px 20px;
+            position: relative;
+        }
+
+        #box>p>img {
+            position: absolute;
+            margin-left: 5px;
+            margin-top: 4px;
+        }
+
+        #box>p>span:first-child {
+            font-size: 20px;
+        }
+
+        #box>p>span:last-child {
+            display: inline-block;
+            margin-left: 38px;
+            color: #bbb;
+            font-size: 15px;
+        }
+
+        .liBox {
+            list-style: none;
+            line-height: 28px;
+            text-align: center;
+        }
+
+        .liBox li {
+            display: inline-block;
+            margin-right: 15px;
+            transition:0.5s linear;
+        }
+        .liBox li.active>a {
+            color:red;
+        }
+
+        .liBox li:last-child {
+            margin-right: 0;
+        }
+
+        .liBox li a {
+            text-decoration: none;
+            color: #666;
+            transition: 0.2s linear;
+
+        }
+
+    .bigBox{
+       width: 325px;
+       height: 300px;
+       overflow: hidden;
+        }
+        .bigBox .content{
+            width:325px;
+            background: #fff;
+            height: 300px;
+            padding:20px 20px;
+            /* border:1px solid red; */
+            list-style: none;
+            overflow: hidden;
+            display: none;
+            /* float: left; */
+        }
+        .bigBox .content a{
+           transition: all 0.5s;
+        }
+        .bigBox .content a:hover{
+            opacity: 0.8;
+        }
+        .bigBox .content img{
+           float:left;
+        }
+        .bigBox .content p{
+           float:right;
+           width: 200px;
+           height: 80px;
+           padding:10px 10px;
+           /* border:1px solid red; */
+        }
+        .bigBox .content p strong{
+           font-size:30px;
+           color:orange;
+           vertical-align: middle;
+           margin-right: 10px;
+           /* border:1px solid red; */
+        }
+        .bigBox .content p:hover{
+          color:red;
+        }
+      
+        .bigBox .current{  
+            display: block;
+        }
+       
+    </style>
+    <script src="jquery.js"></script>
+</head>
+
+<body>
+    <div id='box'>
+        <p>
+            <span>排行榜</span>
+            <img src="images/index.png" alt="">
+            <span>专属你的购物指南</span>
+        </p>
+        <ul class='liBox'>
+            <li class='active'>
+                <a href="" >手机通讯</a>
+            </li>
+            <li>
+                <a href="">大家电</a>
+            </li>
+            <li>
+                <a href="">厨房小电</a>
+            </li>
+            <li>
+                <a href="">生活电器</a>
+            </li>
+            <li>
+                <a href="">饮料冲调</a>
+            </li>
+        </ul>
+        <div class='bigBox'>
+            <!-- 第一个 -->
+            <div class='content current'>
+                <a href=""><img src="images/phone.jpg" alt="">
+                    <p><strong>1</strong>
+                     Apple iPhone 8 Plus (A1864) 64GB 深空灰色 移动联通电信4G手机 </p></a>
+                <a href=""><img src="images/phone.jpg" alt=""><p><strong>1</strong>
+                    Apple iPhone 8 Plus (A1864) 64GB 深空灰色 移动联通电信4G手机 </p></a>
+                <a href=""><img src="images/phone.jpg" alt=""><p><strong>1</strong>
+                    Apple iPhone 8 Plus (A1864) 64GB 深空灰色 移动联通电信4G手机 </p></a>
+            </div>
+          
+        <!-- 第二个 -->
+        <div class='content'>
+                <a href=""><img src="images/da.jpg" alt="">
+                    <p><strong>1</strong>
+                     Apple iPhone 8 Plus (A1864) 64GB 深空灰色 移动联通电信4G手机 </p></a>
+                <a href=""><img src="images/da.jpg" alt=""><p><strong>1</strong>
+                    Apple iPhone 8 Plus (A1864) 64GB 深空灰色 移动联通电信4G手机 </p></a>
+                <a href=""><img src="images/da.jpg" alt=""><p><strong>1</strong>
+                    Apple iPhone 8 Plus (A1864) 64GB 深空灰色 移动联通电信4G手机 </p></a>
+            </div>
+<!-- 第三个 -->
+<div class='content'>
+        <a href=""><img src="images/chu.jpg" alt="">
+            <p><strong>1</strong>
+             Apple iPhone 8 Plus (A1864) 64GB 深空灰色 移动联通电信4G手机 </p></a>
+        <a href=""><img src="images/chu.jpg" alt=""><p><strong>1</strong>
+            Apple iPhone 8 Plus (A1864) 64GB 深空灰色 移动联通电信4G手机 </p></a>
+        <a href=""><img src="images/chu.jpg" alt=""><p><strong>1</strong>
+            Apple iPhone 8 Plus (A1864) 64GB 深空灰色 移动联通电信4G手机 </p></a>
+    </div>
+<!-- 第四个 -->
+<div class='content'>
+        <a href=""><img src="images/sheng.jpg" alt="">
+            <p><strong>1</strong>
+             Apple iPhone 8 Plus (A1864) 64GB 深空灰色 移动联通电信4G手机 </p></a>
+        <a href=""><img src="images/sheng.jpg" alt=""><p><strong>1</strong>
+            Apple iPhone 8 Plus (A1864) 64GB 深空灰色 移动联通电信4G手机 </p></a>
+        <a href=""><img src="images/sheng.jpg" alt=""><p><strong>1</strong>
+            Apple iPhone 8 Plus (A1864) 64GB 深空灰色 移动联通电信4G手机 </p></a>
+    </div>
+<!-- 第五个 -->
+<div class='content '>
+        <a href=""><img src="images/yin.jpg" alt="">
+            <p><strong>1</strong>
+             Apple iPhone 8 Plus (A1864) 64GB 深空灰色 移动联通电信4G手机 </p></a>
+        <a href=""><img src="images/yin.jpg" alt=""><p><strong>1</strong>
+            Apple iPhone 8 Plus (A1864) 64GB 深空灰色 移动联通电信4G手机 </p></a>
+        <a href=""><img src="images/yin.jpg" alt=""><p><strong>1</strong>
+            Apple iPhone 8 Plus (A1864) 64GB 深空灰色 移动联通电信4G手机 </p></a>
+    </div>
+        </div>
+
+    </div>
+        <script>
+        $('ul li').hover(function(){
+            //1.修改鼠标移动上的字体颜色
+           $(this).addClass('active');
+           //1.1 让兄弟全部移除类
+         $(this).siblings().removeClass('active');
+         //2.找到索引值
+         var index=$(this).index();
+         //2.1 根据上面鼠标移入到哪里让哪个根据索引值来显示内容,让它添加类名
+         var div=$('.bigBox .content').eq(index);
+         div.addClass('current')
+        div.siblings().removeClass('current');
+        })
+        </script>
+</body>
+
+</html>

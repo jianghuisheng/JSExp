@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>轮播图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .bannerBox {
+            width: 344px;
+            height: 440px;
+            margin: 50px auto;
+            position: relative;
+        }
+        ul{
+            list-style: none;
+        }
+
+        .imgBox li {
+            width: 344px;
+            height: 440px;
+            position:absolute;
+            transition:all .7s;
+        }
+
+        .imgBox li image {
+            width: 100%;
+            height: 100%;
+        }
+        .imgBox li{
+            opacity: 0;
+        }
+        .imgBox li.current{
+            opacity: 1;
+        }
+        .tabBox{
+            position:absolute;
+            left: 30px;
+            bottom:2px;
+        }
+        .tabBox li{
+            border:solid 2px rgba(0,0,0,0.6);
+            display: inline-block;
+            width:10px;
+            height:10px;
+            border-radius: 50%;
+            margin-right:6px;
+            cursor: pointer;
+        }
+        .tabBox li.active{
+            border-color:#fff;
+            background:#fff;
+            /* 设置边框阴影：X轴 Y轴  模糊度  模糊度的范围  颜色 */
+            box-shadow: 0 0 1px 5px rgba(0,0,0,0.3);
+        }
+        span{
+            background: rgba(176, 176, 176, 0.5);
+            display:block;
+            position:absolute;
+            width: 30px;
+            height: 50px;
+            font-size:40px;
+            z-index: 222;
+            top:calc(50% - 30px);
+            text-align: center;
+            cursor: pointer;
+        }
+        span:nth-child(2){
+            right: 0;
+        }
+        span:hover{
+            background:rgba(176, 176, 176, 1);
+        }
+    </style>
+</head>
+<body>
+<div class="bannerBox">
+    <span><</span>
+    <span>></span>
+    <ul class="imgBox">
+        <li class="current"><img src="images/z1.jpg" alt=""></li>
+        <li><img src="images/z2.jpg" alt=""></li>
+        <li><img src="images/z3.jpg" alt=""></li>
+        <li><img src="images/z4.jpg" alt=""></li>
+        <li><img src="images/z5.jpg" alt=""></li>
+        <li><img src="images/z6.jpg" alt=""></li>
+        <li><img src="images/z7.jpg" alt=""></li>
+        <li><img src="images/z8.jpg" alt=""></li>
+        <li><img src="images/z9.jpg" alt=""></li>
+    </ul>
+    <ul class="tabBox">
+        <li class="active"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+</body>
+<script>
+    var lis=document.querySelectorAll('.tabBox li');
+    var img=document.querySelectorAll('.imgBox li');
+    var prev=document.querySelectorAll('span')[0];
+    var next=document.querySelectorAll('span')[1];
+    var timer;
+    var banner=document.querySelector('.bannerBox');
+    var showIndex=0;
+
+  /*  //静态轮播
+        for (var i=0;i<lis.length;i++){
+        lis[i].index=i;
+        lis[i].onmouseover=function () {
+            for(var j=0;j<lis.length;j++){
+                lis[j].className='';
+                img[j].className='';
+            }
+            this.className='active';
+            img[this.index].className='current'
+        }
+    }*/
+
+    function show() {
+       for(var i=0;i<lis.length;i++){
+           lis[i].className='';
+           img[i].className='';
+       }
+       lis[showIndex].className='active';
+       img[showIndex].className='current';
+    }
+    function xia() {
+        showIndex++;
+        if(showIndex>lis.length-1){
+           showIndex=0;
+        }
+        show();
+    }
+    show();
+    function shang() {
+        showIndex--;
+        if(showIndex<0){
+            showIndex=lis.length-1;
+        }
+        show();
+    }
+    timer=setInterval(function () {
+        xia();
+    },2000)
+
+    banner.onmouseover=function () {
+        clearInterval(timer)
+    }
+    banner.onmouseleave=function () {
+        timer=setInterval(function () {
+            xia();
+        },2000)
+    }
+    for (var i=0;i<lis.length;i++) {
+        lis[i].index=i;
+        lis[i].onmouseover = function () {
+            showIndex=this.index;
+            show();
+        }
+    }
+    next.onclick=function () {
+        xia();
+    }
+    prev.onclick=function () {
+        shang();
+    }
+</script>
+</html>

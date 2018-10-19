@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>九九乘法表</title>
+</head>
+<body>
+<script>
+
+
+    // 九九乘法表中，i代表的是行数，j的取值小于等于当前的行数
+    for( var i = 1; i <= 9; i++ ){
+//        console.log(i);
+        var str = '';
+        for( var j = 1; j <= i; j++ ){
+//            console.log(j);
+//            1 * 1 = 1;
+            str = str + ( j + '*' + i + '=' + i * j + ';' );
+//            console.log( j + '*' + i + '=' + i * j + ';' );
+//            console.log(str);
+        }
+        console.log(str);
+        document.write(str + '<br>');
+
+    }
+    // i = 1时
+//       j = 1; 1, 1 * 1 = 1
+//    i = 2时
+//       j = 1; 1, 2 * 1 = 2;
+//       j = 2; 2, 2 * 2 = 4;
+//    i = 3时
+//       j = 1; 1, 3 * 1 = 3;
+//       j = 2; 2, 3 * 2 = 6;
+//       j = 3; 3, 3 * 3 = 9;
+
+</script>
+</body>
+</html>

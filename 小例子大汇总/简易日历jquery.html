@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>练习</title>
+    <script src="jquery.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing:border-box;
+        }
+        ul{
+            list-style: none;
+        }
+        .banner{
+            width: 280px;
+            margin: 20px auto;
+            background: #eaeaea;
+            border: 1px solid #fff;
+        }
+        ul{
+            overflow: hidden;
+            text-align: center;
+            margin:5px 5px;
+        }
+        ul li{
+            float: left;
+            width: 56px;
+            height: 51px;
+            border: 1px solid #000;
+            margin:5px;
+            color:#fff;
+            background: #424242;
+        }
+        ul li strong{
+            display: block;
+            font-size:12px;
+            padding-top: 5px;
+        }
+        #msg{
+            border:1px solid #fff;
+            width: 90%;
+           margin:5px auto;
+        }
+        p{
+            font-size: 12px;
+        }
+        .banner li.current {
+            color: #F69;
+            background: #fff;
+        }
+
+    </style>
+</head>
+<body>
+<div class="banner">
+    <ul>
+        <li><strong>1</strong>JAN</li>
+        <li><strong>2</strong>FER</li>
+        <li><strong>3</strong>MAR</li>
+        <li><strong>4</strong>APR</li>
+        <li><strong>5</strong>MAY</li>
+        <li class="current"><strong>6</strong>JUN</li>
+        <li><strong>7</strong>JUL</li>
+        <li><strong>8</strong>AUG</li>
+        <li><strong>9</strong>SEP</li>
+        <li><strong>10</strong>OCT</li>
+        <li><strong>11</strong>NOV</li>
+        <li><strong>12</strong>DEC</li>
+    </ul>
+    <div id="msg">
+        <h4>
+            <strong>6</strong>
+            月节日
+        </h4>
+
+        <p>端午节：6月4日至6日放假3天。</p>
+    </div>
+</div>
+</body>
+<script>
+    var arr = [
+        "元旦：1月1日至3日放假三天。",
+        "春节：2月2日至8日放假7天。",
+        "妇女节：3月8日妇女节，与我无关。",
+        "清明节：4月3日至5日放假3天",
+        "劳动节：4月30日至5月2日放假3天。",
+        "端午节：6月4日至6日放假3天。",
+        "小暑：7月7日小暑。不放假。",
+        "七夕节：8月6日七夕节。不放假。",
+        "中秋节：9月10日至12日放假3天。",
+        "国庆节：10月1日至7日放假7天。",
+        "立冬：11月8日立冬。不放假。",
+        "艾滋病日:12月1日<br />废除奴隶制国际日:12月2日。"
+    ]
+    $('li').hover(function () {
+        var index=$(this).index();
+        $(this).addClass('current').siblings().removeClass('current');
+        $('h4 strong').html(index+1);
+        $('p').html(arr[index])
+    })
+
+</script>
+</html>

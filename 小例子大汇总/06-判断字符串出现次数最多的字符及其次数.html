@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>判断字符串出现次数最多的字符及其次数</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 最终目的：出现次数最多的字符与它的次数
+    // 步骤1：获取字符串中出现的所有的字符，其次数分别是1
+    // 步骤2：如果遇见重复的字符，次数加1.得到：字符所有的次数
+    // 步骤3：比大小，谁大，取谁
+
+    // 有参无返回值封装+声明提升
+    show('fdgfdhfhcgjg');
+    function show(str) {
+        var minNumber = Infinity,
+            maxNumber = 0,
+            obj = {};
+        for (i = 0; i < str.length; i++) {
+            var a = str[i];
+            // 如果该字符不存在，则在对象中添加该字符属性，其值为初始次数1，如果存在，次数++
+            // if判断undefined或null或0的时候，会隐式类型转换成布尔值false
+            if (!obj[a]) {
+                obj[a] = 1;
+            } else {
+                obj[a]++;
+            }
+        }
+        console.log(obj);
+
+        //比大小
+        for (var b in obj) {
+            if (maxNumber < obj[b]) {
+                maxNumber = obj[b];
+            }
+            if (minNumber > obj[b]) {
+                minNumber = obj[b];
+            }
+        }
+
+        //    处理重复bug
+        for (var c in obj){
+            if (obj[c]==maxNumber){
+                console.log('出现次数最多的是'+c+':'+'出现次数'+maxNumber)
+            }
+            if(obj[c]==minNumber){
+                console.log('出现次数最少的是'+c+':'+'出现次数'+minNumber);
+            }
+        }
+    }
+</script>
+
+<script>
+     /*  var obj = {
+     name: '1zhang23',
+     name: '34asdfas3'
+     }
+     console.log(obj.name);
+     */
+
+    /*
+     var obj={}
+     obj.name='张三';
+     obj.name='李四';
+     console.log(obj.name);
+     console.log(obj);
+     //     没有age,undefined
+     console.log(obj.age);
+     */
+
+    /*
+     var obj = {name: '张三'};
+     console.log(obj.name);
+     console.log(obj['name']);
+     //    console.log(typeof (obj['name']));
+     obj['age'] = 18;
+     obj.age = 19;
+     console.log(obj.age);
+     */
+</script>
+</html>

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>实例讲解--星级评分</title>
+    <style>
+        /*全局样式*/
+
+        body,
+        ul,
+        p {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 800px;
+            margin: 50px auto;
+            position: relative;
+        }
+
+        ul {
+            display: inline-block;
+            list-style: none;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        li {
+            width: 30px;
+            height: 30px;
+            background: url(images/star.png);
+            background-size: 30px;
+            display: inline-block;
+            /*margin-right:5px;*/
+            cursor: pointer;
+        }
+
+        div span:nth-of-type(2) {
+            display: none;
+        }
+
+        span strong {
+            color: red;
+        }
+
+        p {
+            width: 200px;
+            position: absolute;
+            left: 120px;
+            display: none;
+        }
+
+        p span {
+            color: red;
+            display: block;
+        }
+
+        li.on {
+            background-position: 0 bottom;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <span> 点击星星进行评分： </span>
+        <ul>
+            <li> </li>
+            <li> </li>
+            <li> </li>
+            <li> </li>
+            <li> </li>
+        </ul>
+        <span>
+            <strong> 4分 </strong>
+            (质量不错，与卖家描述的基本一致，还是挺满意的)
+        </span>
+        <p>
+            <span> 5分 &nbsp; 十分满意 </span>
+            质量不错，与卖家描述的基本一致，还是挺满意的
+        </p>
+    </div>
+</body>
+<script>
+    // 效果
+    // 1.鼠标滑过星星时，当前及之前的所有星星都变黄色
+    // 2.鼠标离开星星时，星星恢复原色
+    // 3.鼠标点击星星时，当前及之前的所有星星都变黄色，但是鼠标离开时，保留当前点击效果
+    var arr1 = [
+        '非常不满意', '不满意', '一般', '满意', '挺满意'
+    ]
+    var arr2 = [
+        '差得太离谱，与卖家描述的严重不符，非常不满',
+        '部分有破损，与卖家描述的不符，不满意',
+        '质量一般，没有卖家描述的那么好',
+        '质量不错，与卖家描述的基本一致，还是挺满意的',
+        '质量非常好，与卖家描述的完全一致，非常满意'
+    ]
+
+      
+    // 获取所需要的标签
+    var lis = document.querySelectorAll('li');
+    var span = document.querySelectorAll('span')[1];
+    var p = document.querySelector('p');
+    // 声明变量，存储被点击时的索引值
+    var isStore;
+    var isStar;
+
+
+    // 当前及之前的所有星星都变黄色
+    // 需要得到当前星星的索引值
+    function show(num) {
+        //        console.log(num);
+        //      num:存储是鼠标滑过或者鼠标离开时的索引值
+        //      isStar该变量存储：鼠标滑过或者鼠标离开或者鼠标点击时的索引值
+        isStar = num || isStore;//0  undefined==>undefined  无法循环下边
+
+        for (var j = 0; j < lis.length; j++) {
+            if (j < isStar) {
+                lis[j].className = 'on';
+            } else {
+                lis[j].className = '';
+            }
+        }
+    }
+
+  
+
+    // 循环遍历li标签，添加事件   i=0没效果 从1开始,后边等于
+    for (var i = 1; i <= lis.length; i++) {
+        // 将当前的索引值绑定在该标签对象上
+        lis[i - 1].index = i;
+        lis[i - 1].onmouseover = function () {
+            //          console.log(this.index);
+            show(this.index);
+        }
+
+        lis[i - 1].onmouseleave = function () {
+            // 鼠标离开，未赋值，参数默认值undefined
+            show();
+        }
+
+        lis[i - 1].onclick = function () {
+            show(this.index);
+            // 保留被点击的效果，即保留索引值,星星数=点击值
+            isStore = this.index;
+        }
+    }
+
+
+
+
+
+</script>
+
+</html>
